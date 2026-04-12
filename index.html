@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio Access</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:#0a0a0b;
+  color:#e8e8ec;
+  font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans",Meiryo,sans-serif;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:100vh;
+}
+.gate{
+  text-align:center;
+  padding:48px 40px;
+  background:#111114;
+  border:1px solid #2a2a32;
+  border-radius:16px;
+  max-width:400px;
+  width:90%;
+}
+.gate h1{font-size:20px;margin-bottom:8px;font-weight:600}
+.gate p{font-size:13px;color:#9999aa;margin-bottom:32px}
+.gate input{
+  width:100%;
+  padding:14px 16px;
+  background:#18181c;
+  border:1px solid #2a2a32;
+  border-radius:8px;
+  color:#e8e8ec;
+  font-size:15px;
+  outline:none;
+  margin-bottom:16px;
+  transition:border-color .2s;
+}
+.gate input:focus{border-color:#ff6b35}
+.gate button{
+  width:100%;
+  padding:14px;
+  background:#ff6b35;
+  color:#fff;
+  border:none;
+  border-radius:8px;
+  font-size:15px;
+  font-weight:600;
+  cursor:pointer;
+  transition:opacity .2s;
+}
+.gate button:hover{opacity:.85}
+.error{color:#ff4444;font-size:13px;margin-top:12px;display:none}
+</style>
+</head>
+<body>
+<div class="gate">
+  <h1>Portfolio</h1>
+  <p>閲覧にはパスワードが必要です</p>
+  <form id="authForm">
+    <input type="password" id="pw" placeholder="パスワードを入力" autofocus autocomplete="off">
+    <button type="submit">Enter</button>
+  </form>
+  <div class="error" id="err">パスワードが正しくありません</div>
+</div>
+<script>
+const HASH='90a3ad8ee281ce651ac844a674134ba0c38c16b9391d57c4a033dbd124001a17';
+document.getElementById('authForm').addEventListener('submit',async function(e){
+  e.preventDefault();
+  const pw=document.getElementById('pw').value;
+  const enc=new TextEncoder().encode(pw);
+  const buf=await crypto.subtle.digest('SHA-256',enc);
+  const hex=Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+  if(hex===HASH){
+    sessionStorage.setItem('portfolio_auth','1');
+    window.location.href='portfolio.html'+window.location.hash;
+  }else{
+    document.getElementById('err').style.display='block';
+    document.getElementById('pw').value='';
+    document.getElementById('pw').focus();
+  }
+});
+</script>
+</body>
+</html>

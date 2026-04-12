@@ -1,0 +1,1453 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIパク | ワークフェア ひのき薪 — 広告制作ポートフォリオ</title>
+<script>if(!sessionStorage.getItem('portfolio_auth'))window.location.href='index.html';</script>
+<style>
+/* ===== RESET & BASE ===== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0a0a0b;
+  --bg2:#111114;
+  --bg3:#18181c;
+  --bg4:#1e1e24;
+  --border:#2a2a32;
+  --border2:#3a3a46;
+  --text:#e8e8ec;
+  --text2:#9999aa;
+  --text3:#555566;
+  --accent:#ff6b35;
+  --accent2:#ffb347;
+  --blue:#3d8ef0;
+  --green:#2ecc7a;
+  --purple:#9b59f5;
+  --gold:#d4a017;
+  --c1:#ff6b35;
+  --c2:#3d8ef0;
+  --c3:#2ecc7a;
+  --c4:#d4a017;
+  --tag-real:#0d2a1a;
+  --tag-real-border:#2ecc7a;
+  --tag-real-text:#2ecc7a;
+  --tag-infer:#0d1a2a;
+  --tag-infer-border:#3d8ef0;
+  --tag-infer-text:#3d8ef0;
+  --radius:12px;
+  --radius-sm:8px;
+  --font:"Hiragino Kaku Gothic ProN","Hiragino Sans",Meiryo,"Yu Gothic",sans-serif;
+}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--font);
+  line-height:1.7;
+  font-size:15px;
+  overflow-x:hidden;
+}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+
+/* ===== STICKY NAV ===== */
+#sticky-nav{
+  position:sticky;top:0;z-index:200;
+  background:rgba(10,10,11,0.94);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+  padding:0 32px;
+  display:flex;align-items:center;justify-content:space-between;
+  height:56px;
+}
+.nav-brand{
+  font-size:13px;font-weight:900;color:var(--accent);
+  letter-spacing:.06em;white-space:nowrap;
+}
+.nav-brand span{color:var(--text2);font-weight:400}
+.nav-tabs{display:flex;gap:4px;list-style:none}
+.nav-tab{
+  padding:8px 18px;
+  font-size:13px;font-weight:700;
+  color:var(--text2);
+  cursor:pointer;
+  border-radius:100px;
+  border:1px solid transparent;
+  background:none;
+  transition:all .18s;
+  letter-spacing:.01em;
+}
+.nav-tab:hover{color:var(--text);background:var(--bg3)}
+.nav-tab.active{
+  color:var(--text);
+  background:var(--bg3);
+  border-color:var(--border2);
+}
+.nav-tab.active[data-tab="cr"]{color:var(--accent);border-color:rgba(255,107,53,.35);background:rgba(255,107,53,.08)}
+
+/* ===== PAGE PANELS ===== */
+.page-panel{display:none}
+.page-panel.active{display:block}
+
+/* ===== TAG LABELS ===== */
+.tag-real,.tag-infer{
+  display:inline-block;font-size:10px;font-weight:700;
+  padding:2px 7px;border-radius:4px;
+  letter-spacing:.04em;vertical-align:middle;
+  white-space:nowrap;
+}
+.tag-real{background:var(--tag-real);border:1px solid var(--tag-real-border);color:var(--tag-real-text)}
+.tag-infer{background:var(--tag-infer);border:1px solid var(--tag-infer-border);color:var(--tag-infer-text)}
+
+/* ===== LAYER BADGES ===== */
+.layer-badge{
+  display:inline-block;font-size:11px;font-weight:700;
+  padding:3px 10px;border-radius:100px;
+  letter-spacing:.04em;white-space:nowrap;
+}
+.layer-badge.chozai{background:rgba(155,89,245,.15);border:1px solid rgba(155,89,245,.4);color:#b07ef7}
+.layer-badge.zenzai{background:rgba(61,142,240,.15);border:1px solid rgba(61,142,240,.4);color:#5fa8f5}
+.layer-badge.jun{background:rgba(255,107,53,.15);border:1px solid rgba(255,107,53,.4);color:#ff8c60}
+.layer-badge.kenzai{background:rgba(46,204,122,.15);border:1px solid rgba(46,204,122,.4);color:#4ed88a}
+
+/* ===== SECTION COMMON ===== */
+.section{max-width:1200px;margin:0 auto;padding:56px 32px}
+.section.narrow{max-width:960px}
+.section-header{margin-bottom:36px}
+.act-label{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:11px;font-weight:700;letter-spacing:.14em;
+  color:var(--text3);text-transform:uppercase;margin-bottom:12px;
+}
+.act-label::before{content:'';display:block;width:20px;height:2px;background:currentColor}
+.section-title{font-size:clamp(22px,3vw,32px);font-weight:900;letter-spacing:-.02em;line-height:1.2}
+.section-sub{color:var(--text2);font-size:14px;margin-top:8px;max-width:640px;line-height:1.65}
+
+/* ===== HERO (CR GALLERY TOP) ===== */
+#cr-hero{
+  padding:48px 32px 32px;
+  max-width:1200px;margin:0 auto;
+}
+.cr-hero-inner{
+  background:linear-gradient(135deg,rgba(255,107,53,.06) 0%,rgba(61,142,240,.04) 100%);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:40px 48px;
+  display:flex;align-items:center;justify-content:space-between;gap:32px;
+  flex-wrap:wrap;
+}
+.cr-hero-left{flex:1;min-width:240px}
+.cr-hero-eyebrow{
+  font-size:11px;font-weight:700;letter-spacing:.14em;
+  color:var(--accent);text-transform:uppercase;margin-bottom:12px;
+}
+.cr-hero-title{
+  font-size:clamp(20px,3vw,30px);font-weight:900;line-height:1.2;
+  letter-spacing:-.02em;margin-bottom:8px;
+}
+.cr-hero-sub{font-size:14px;color:var(--text2);line-height:1.6}
+.cr-hero-stats{
+  display:flex;gap:20px;flex-wrap:wrap;flex-shrink:0;
+}
+.stat-card{
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:var(--radius);padding:18px 24px;text-align:center;min-width:100px;
+}
+.stat-num{font-size:28px;font-weight:900;color:var(--accent);line-height:1}
+.stat-label{font-size:11px;color:var(--text2);margin-top:4px;letter-spacing:.02em}
+
+/* ===== CR GALLERY ===== */
+.cr-concept-section{
+  max-width:1200px;margin:0 auto;padding:0 32px 56px;
+}
+.concept-section-header{
+  display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+  padding:28px 0 20px;
+  border-top:1px solid var(--border);
+  margin-top:8px;
+}
+.concept-section-header.c1-header{border-top-color:rgba(255,107,53,.3)}
+.concept-section-header.c2-header{border-top-color:rgba(61,142,240,.3)}
+.concept-section-header.c3-header{border-top-color:rgba(46,204,122,.3)}
+.concept-section-header.c4-header{border-top-color:rgba(212,160,23,.3)}
+
+.concept-id-badge{
+  font-size:12px;font-weight:900;letter-spacing:.08em;
+  padding:4px 12px;border-radius:100px;white-space:nowrap;
+}
+.c1-badge{background:rgba(255,107,53,.15);color:var(--c1);border:1px solid rgba(255,107,53,.3)}
+.c2-badge{background:rgba(61,142,240,.15);color:var(--c2);border:1px solid rgba(61,142,240,.3)}
+.c3-badge{background:rgba(46,204,122,.15);color:var(--c3);border:1px solid rgba(46,204,122,.3)}
+.c4-badge{background:rgba(212,160,23,.15);color:var(--c4);border:1px solid rgba(212,160,23,.3)}
+
+.concept-section-name{
+  font-size:18px;font-weight:900;line-height:1.2;
+}
+.concept-section-meta{
+  display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-left:auto;
+}
+.concept-section-target{
+  font-size:12px;color:var(--text2);
+}
+
+/* Banner gallery grid */
+.banner-gallery{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:16px;
+  margin-bottom:20px;
+}
+@media(max-width:900px){.banner-gallery{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:500px){.banner-gallery{grid-template-columns:1fr}}
+
+.banner-card{
+  border-radius:var(--radius);
+  overflow:hidden;
+  border:2px solid var(--border);
+  background:var(--bg3);
+  cursor:pointer;
+  transition:all .2s;
+  position:relative;
+}
+.banner-card:hover{transform:translateY(-3px);box-shadow:0 8px 32px rgba(0,0,0,.4)}
+.banner-card.c1-card:hover{border-color:rgba(255,107,53,.5)}
+.banner-card.c2-card:hover{border-color:rgba(61,142,240,.5)}
+.banner-card.c3-card:hover{border-color:rgba(46,204,122,.5)}
+.banner-card.c4-card:hover{border-color:rgba(212,160,23,.5)}
+.banner-card img{
+  width:100%;aspect-ratio:4/5;object-fit:cover;display:block;
+}
+.banner-card-label{
+  padding:10px 12px;
+  background:var(--bg3);
+  border-top:1px solid var(--border);
+}
+.banner-card-copy{
+  font-size:11px;font-weight:700;color:var(--text);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  margin-bottom:2px;
+}
+.banner-card-type{font-size:10px;color:var(--text3)}
+
+/* Concept context strip */
+.concept-context-strip{
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:20px 24px;
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;
+  margin-bottom:8px;
+}
+.ctx-item-label{font-size:10px;font-weight:700;letter-spacing:.1em;color:var(--text3);margin-bottom:4px}
+.ctx-item-val{font-size:13px;color:var(--text);line-height:1.5}
+.ctx-item-val.accent{color:var(--accent)}
+
+/* Belief shift mini */
+.belief-mini{
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:var(--radius-sm);padding:12px 16px;
+  margin-bottom:24px;
+}
+.bs-mini-before{
+  font-size:12px;color:var(--text3);
+  text-decoration:line-through;flex:1;min-width:150px;
+}
+.bs-mini-arrow{color:var(--accent);font-size:16px;flex-shrink:0}
+.bs-mini-after{
+  font-size:12px;color:var(--text);flex:1;min-width:150px;
+}
+
+/* ===== SHORT AD SECTION ===== */
+.shortad-section{
+  max-width:1200px;margin:0 auto;padding:0 32px 56px;
+}
+.shortad-inner{
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:16px;padding:32px;
+}
+.shortad-flex{display:flex;gap:32px;flex-wrap:wrap;align-items:flex-start}
+.shortad-video-wrap{flex:0 0 240px;max-width:100%}
+.shortad-video-wrap video{
+  width:100%;aspect-ratio:9/16;border-radius:12px;
+  background:#000;border:1px solid var(--border);display:block;
+}
+.shortad-info{flex:1;min-width:200px}
+.scene-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:16px;
+}
+@media(max-width:700px){.scene-grid{grid-template-columns:repeat(3,1fr)}}
+.scene-thumb{border-radius:6px;overflow:hidden;border:1px solid var(--border)}
+.scene-thumb img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}
+.scene-thumb-num{
+  font-size:10px;color:var(--text3);text-align:center;padding:3px 0;
+  background:var(--bg2);
+}
+
+/* ===== STRATEGY PAGE ===== */
+/* N1 Cards */
+.n1-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;
+}
+.n1-card{
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:var(--radius);padding:24px;
+  position:relative;overflow:hidden;
+}
+.n1-card.primary-card{
+  border-color:var(--accent);
+  background:rgba(255,107,53,.03);
+}
+.n1-primary-badge{
+  position:absolute;top:12px;right:12px;
+  font-size:10px;font-weight:700;letter-spacing:.06em;
+  padding:3px 8px;border-radius:100px;
+  background:var(--accent);color:#fff;
+}
+.n1-layer-id{font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--text3);margin-bottom:6px}
+.n1-name{font-size:18px;font-weight:900;margin-bottom:8px;line-height:1.2}
+.n1-persona{font-size:12px;color:var(--text2);margin-bottom:16px;line-height:1.65}
+.n1-insight-block{margin-bottom:12px}
+.n1-insight-lbl{font-size:11px;font-weight:700;color:var(--text3);letter-spacing:.08em;margin-bottom:4px}
+.n1-insight-txt{font-size:13px;color:var(--text);line-height:1.6}
+.n1-fear{font-size:12px;color:#e07070;line-height:1.5;background:rgba(220,80,80,.06);border:1px solid rgba(220,80,80,.15);border-radius:6px;padding:8px 12px;margin-bottom:12px}
+.n1-score-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:16px;padding-top:16px;border-top:1px solid var(--border)}
+.score-pill{
+  font-size:11px;padding:3px 10px;border-radius:100px;
+  background:var(--bg2);border:1px solid var(--border);color:var(--text2);
+}
+.score-pill strong{color:var(--accent)}
+.score-composite{
+  font-size:12px;font-weight:700;
+  padding:3px 10px;border-radius:100px;
+  background:rgba(255,107,53,.12);border:1px solid rgba(255,107,53,.3);
+  color:var(--accent);margin-left:auto;
+}
+.n1-layer-badge-row{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+
+/* Concept compare table */
+.concept-compare{
+  width:100%;border-collapse:separate;border-spacing:0;
+  font-size:13px;
+}
+.concept-compare th{
+  padding:12px 16px;text-align:left;font-size:11px;font-weight:700;
+  letter-spacing:.08em;color:var(--text3);background:var(--bg2);
+  border-bottom:1px solid var(--border);
+}
+.concept-compare th:first-child{border-radius:8px 0 0 0}
+.concept-compare th:last-child{border-radius:0 8px 0 0}
+.concept-compare td{
+  padding:14px 16px;vertical-align:top;line-height:1.6;
+  border-bottom:1px solid var(--border);
+  background:var(--bg3);
+  color:var(--text);
+}
+.concept-compare tr:last-child td{border-bottom:none}
+.concept-compare tr:last-child td:first-child{border-radius:0 0 0 8px}
+.concept-compare tr:last-child td:last-child{border-radius:0 0 8px 0}
+.concept-compare td.row-label{
+  font-weight:700;color:var(--text2);font-size:12px;
+  white-space:nowrap;background:var(--bg2);
+}
+.concept-compare td.c1-col{border-left:3px solid var(--c1)}
+.concept-compare td.c2-col{border-left:3px solid var(--c2)}
+.concept-compare td.c3-col{border-left:3px solid var(--c3)}
+.concept-compare td.c4-col{border-left:3px solid var(--c4)}
+.concept-compare .n1-score-cell{
+  font-size:18px;font-weight:900;
+}
+.strength-text{font-size:12px;color:var(--green)}
+.risk-text{font-size:12px;color:#e07070}
+
+/* Belief shift */
+.belief-shift-block{
+  display:flex;gap:12px;align-items:stretch;flex-wrap:wrap;margin-top:8px;
+}
+.bs-box{
+  flex:1;min-width:180px;padding:12px 16px;border-radius:var(--radius-sm);font-size:13px;line-height:1.5;
+}
+.bs-before{background:#141414;border:1px solid var(--border);color:var(--text2)}
+.bs-after{background:rgba(46,204,122,.05);border:1px solid rgba(46,204,122,.2);color:var(--text)}
+.bs-label{font-size:10px;font-weight:700;letter-spacing:.08em;margin-bottom:4px;opacity:.7}
+
+/* ===== RAG PAGE ===== */
+.rag-confidence-bar-wrap{margin:12px 0 4px}
+.rag-bar-bg{
+  height:10px;background:var(--bg2);border-radius:5px;
+  border:1px solid var(--border);overflow:hidden;
+}
+.rag-bar-fill{
+  height:100%;border-radius:5px;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  transition:width .5s ease;
+}
+.rag-source-list{list-style:none;display:flex;flex-direction:column;gap:8px;margin-top:16px}
+.rag-source-item{
+  display:flex;align-items:flex-start;gap:12px;
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:var(--radius-sm);padding:12px 16px;
+}
+.rag-source-icon{
+  width:28px;height:28px;border-radius:6px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:14px;
+}
+.rag-source-name{font-size:13px;font-weight:700;color:var(--text)}
+.rag-source-desc{font-size:12px;color:var(--text2);margin-top:2px;line-height:1.5}
+.rag-chunk-bar{
+  display:flex;align-items:center;gap:8px;margin-top:12px;
+}
+.chunk-count{
+  font-size:28px;font-weight:900;color:var(--blue);
+}
+.rag-competitor-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:16px;
+}
+.competitor-card{
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:var(--radius-sm);padding:16px;
+}
+.comp-name{font-size:14px;font-weight:700;margin-bottom:4px}
+.comp-pos{font-size:12px;color:var(--text2);line-height:1.5;margin-bottom:6px}
+.comp-price{font-size:12px;color:var(--text3)}
+
+/* ===== COMMON CARDS ===== */
+.card{
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:var(--radius);padding:24px;
+}
+.card-title{font-size:13px;font-weight:700;color:var(--accent);margin-bottom:12px;letter-spacing:.04em}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+
+/* ===== FOOTER ===== */
+#site-footer{
+  text-align:center;padding:40px 24px;
+  border-top:1px solid var(--border);
+  font-size:12px;color:var(--text3);
+}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:768px){
+  #sticky-nav{padding:0 16px}
+  .nav-tab{padding:6px 12px;font-size:12px}
+  #cr-hero{padding:24px 16px}
+  .cr-hero-inner{padding:24px 20px}
+  .cr-concept-section,.shortad-section{padding-left:16px;padding-right:16px}
+  .section{padding:40px 16px}
+  .banner-gallery{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== STICKY NAV ===== -->
+<nav id="sticky-nav" role="navigation">
+  <div class="nav-brand">AIパク <span>/ ワークフェア ひのき薪</span></div>
+  <ul class="nav-tabs" role="tablist">
+    <li role="presentation">
+      <button class="nav-tab active" data-tab="cr" role="tab" aria-selected="true" aria-controls="panel-cr" id="tab-cr">
+        CR Gallery
+      </button>
+    </li>
+    <li role="presentation">
+      <button class="nav-tab" data-tab="strategy" role="tab" aria-selected="false" aria-controls="panel-strategy" id="tab-strategy">
+        戦略
+      </button>
+    </li>
+    <li role="presentation">
+      <button class="nav-tab" data-tab="rag" role="tab" aria-selected="false" aria-controls="panel-rag" id="tab-rag">
+        RAG
+      </button>
+    </li>
+  </ul>
+</nav>
+
+<!-- ===================================================
+     PAGE: CR GALLERY（デフォルト表示）
+     =================================================== -->
+<div id="panel-cr" class="page-panel active" role="tabpanel" aria-labelledby="tab-cr">
+
+  <!-- CR Hero -->
+  <div id="cr-hero">
+    <div class="cr-hero-inner">
+      <div class="cr-hero-left">
+        <div class="cr-hero-eyebrow">WORKFAIR HINOKI MAKI — CREATIVE OUTPUT</div>
+        <h1 class="cr-hero-title">N1の信念構造を解析し、<br>4コンセプト × 32枚の<br>仮説広告を展開した。</h1>
+        <p class="cr-hero-sub" style="margin-top:12px">
+          <span class="tag-infer">[AI推論]</span>
+          各コンセプトは独立した世界観で設計。異なる層のN1に対し、異なる感情フックで届ける。
+        </p>
+      </div>
+      <div class="cr-hero-stats">
+        <div class="stat-card">
+          <div class="stat-num">32</div>
+          <div class="stat-label">バナー枚数</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">4</div>
+          <div class="stat-label">コンセプト数</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">4</div>
+          <div class="stat-label">N1ターゲット層</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">1</div>
+          <div class="stat-label">ショート動画</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- C1 Section -->
+  <div class="cr-concept-section">
+    <div class="concept-section-header c1-header">
+      <span class="concept-id-badge c1-badge">C1</span>
+      <div>
+        <div class="concept-section-name">はじめての焚き火を、ひのきの香りで。</div>
+        <div class="concept-section-meta">
+          <span class="concept-section-target">ターゲット: 焚き火入門パパ（L1）</span>
+          <span class="layer-badge jun">準顕在層</span>
+          <span class="tag-real">[実データ]</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="belief-mini">
+      <span class="bs-mini-before">「焚き火って難しそう。薪に火がつかなかったら恥ずかしい」</span>
+      <span class="bs-mini-arrow">→</span>
+      <span class="bs-mini-after">「ひのき薪なら初めてでも簡単に火がつく。子供と一緒に焚き火デビューできた」</span>
+    </div>
+
+    <div class="concept-context-strip">
+      <div>
+        <div class="ctx-item-label">コアメッセージ</div>
+        <div class="ctx-item-val">初心者の不安（火がつかない恐怖）を解決し、子供との原体験を届ける</div>
+      </div>
+      <div>
+        <div class="ctx-item-label">感情フック</div>
+        <div class="ctx-item-val">子供が初めて火を見つめた瞬間の表情。その原体験をプレゼントできる親でありたい</div>
+      </div>
+      <div>
+        <div class="ctx-item-label">推薦度</div>
+        <div class="ctx-item-val accent">Primary — N1スコア 0.65</div>
+      </div>
+      <div>
+        <div class="ctx-item-label">データ根拠</div>
+        <div class="ctx-item-val"><span class="tag-real">[実データ]</span> 商品ページ: 火つき良/煙少/灰なし<br><span class="tag-infer">[AI推論]</span> 初心者ペイン = 火がつかない不安</div>
+      </div>
+    </div>
+
+    <div class="banner-gallery" id="c1-gallery">
+      <!-- C1 A面: コピーA -->
+      <div class="banner-card c1-card">
+        <img src="assets/C1_A1.png" alt="C1 A1 バナー"
+          onerror="this.outerHTML='<div style=\'background:#1a1a1a;aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;border-radius:8px;color:#555;font-size:12px;flex-direction:column;gap:4px\'><div>C1_A1</div><div style=\'font-size:10px\'>画像準備中</div></div>'">
+        <div class="banner-card-label">
+          <div class="banner-card-copy">A1 / コピーA</div>
+          <div class="banner-card-type">ビジュアル1 — 家族+焚き火</div>
+        </div>
+      </div>
+      <div class="banner-card c1-card">
+        <img src="assets/C1_A2.png" alt="C1 A2 バナー"
+          onerror="this.outerHTML='<div style=\'background:#1a1a1a;aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;border-radius:8px;color:#555;font-size:12px;flex-direction:column;gap:4px\'><div>C1_A2</div><div style=\'font-size:10px\'>画像準備中</div></div>'">
+        <div class="banner-card-label">
+          <div class="banner-card-copy">A2 / コピーA</div>
+          <div class="banner-card-type">ビジュアル2 — ひのきの香り</div>
+        </div>
+      </div>
+      <div class="banner-card c1-card">
+        <img src="assets/C1_A3.png" alt="C1 A3 バナー"
+          onerror="this.outerHTML='<div style=\'background:#1a1a1a;aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;border-radius:8px;color:#555;font-size:12px;flex-direction:column;gap:4px\'><div>C1_A3</div><div style=\'font-size:10px\'>画像準備中</div></div>'">
+        <div class="banner-card-label">
+          <div class="banner-card-copy">A3 / コピーA</div>
+          <div class="banner-card-type">ビジュアル3 — 子供と炎</div>
+        </div>
+      </div>
+      <div class="banner-card c1-card">
+        <img src="assets/C1_A4.png" alt="C1 A4 バナー"
+          onerror="this.outerHTML='<div style=\'background:#1a1a1a;aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;border-radius:8px;color:#555;font-size:12px;flex-direction:column;gap:4px\'><div>C1_A4</div><div style=\'font-size:10px\'>画像準備中</div></div>'">
+        <div class="banner-card-label">
+          <div class="banner-card-copy">A4 / コピーA</div>
+          <div class="banner-card-type">ビジュアル4 — 夕暮れキャンプ</div>
+        </div>
+      </div>
+      <!-- C1 B面: コピーB -->
+      <div class="banner-card c1-card">
+        <img src="assets/C1_B1.png" alt="C1 B1 バナー"
+          onerror="this.outerHTML='<div style=\'background:#1a1a1a;aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;border-radius:8px;color:#555;font-size:12px;flex-direction:column;gap:4px\'><div>C1_B1</div><div style=\'font-size:10px\'>画像準備中</div></div>'">
+        <div class="banner-card-label">
+          <div class="banner-card-copy">B1 / コピーB</div>
+          <div class="banner-card-type">ビジュアル1 — 家族+焚き火</div>
+        </div>
+      </div>
+      <div class="banner-card c1-card">
+        <img src="assets/C1_B2.png" alt="C1 B2 バナー"
+          onerror="this.outerHTML='<div style=\'background:#1a1a1a;aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;border-radius:8px;color:#555;font-size:12px;flex-direction:column;gap:4px\'><div>C1_B2</div><div style=\'font-size:10px\'>画像準備中</div></div>'">
+        <div class="banner-card-label">
+          <div class="banner-card-copy">B2 / コピーB</div>
+          <div class="banner-card-type">ビジュアル2 — ひのきの香り</div>
+        </div>
+      </div>
+      <div class="banner-card c1-card">
+        <img src="assets/C1_B3.png" alt="C1 B3 バナー"
+          onerror="this.outerHTML='<div style=\'background:#1a1a1a;aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;border-radius:8px;color:#555;font-size:12px;flex-direction:column;gap:4px\'><div>C1_B3</div><div style=\'font-size:10px\'>画像準備中</div></div>'">
+        <div class="banner-card-label">
+          <div class="banner-card-copy">B3 / コピーB</div>
+          <div class="banner-card-type">ビジュアル3 — 子供と炎</div>
+        </div>
+      </div>
+      <div class="banner-card c1-card">
+        <img src="assets/C1_B4.png" alt="C1 B4 バナー"
+          onerror="this.outerHTML='<div style=\'background:#1a1a1a;aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;border-radius:8px;color:#555;font-size:12px;flex-direction:column;gap:4px\'><div>C1_B4</div><div style=\'font-size:10px\'>画像準備中</div></div>'">
+        <div class="banner-card-label">
+          <div class="banner-card-copy">B4 / コピーB</div>
+          <div class="banner-card-type">ビジュアル4 — 夕暮れキャンプ</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- C2 Section -->
+  <div class="cr-concept-section">
+    <div class="concept-section-header c2-header">
+      <span class="concept-id-badge c2-badge">C2</span>
+      <div>
+        <div class="concept-section-name">火を見つめる、自分だけの時間。</div>
+        <div class="concept-section-meta">
+          <span class="concept-section-target">ターゲット: こだわりソロキャンパー（L2）</span>
+          <span class="layer-badge kenzai">顕在層</span>
+          <span class="tag-real">[実データ]</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="belief-mini">
+      <span class="bs-mini-before">「薪は何でもいい、燃えればいい」</span>
+      <span class="bs-mini-arrow">→</span>
+      <span class="bs-mini-after">「薪が変わると焚き火体験の質が変わる。ひのきの香りと静かな燃焼は別格」</span>
+    </div>
+
+    <div class="concept-context-strip">
+      <div>
+        <div class="ctx-item-label">コアメッセージ</div>
+        <div class="ctx-item-val">焚き火の「質」を上位概念で訴求。感度の高い層の内的動機に刺さる</div>
+      </div>
+      <div>
+        <div class="ctx-item-label">感情フック</div>
+        <div class="ctx-item-val">焚き火の炎を見つめる時間は、現代人にとっての瞑想。その瞑想の質を、薪で変える</div>
+      </div>
+      <div>
+        <div class="ctx-item-label">N1スコア</div>
+        <div class="ctx-item-val">複合スコア 0.63 <span class="tag-infer">[AI推論]</span></div>
+      </div>
+      <div>
+        <div class="ctx-item-label">データ根拠</div>
+        <div class="ctx-item-val"><span class="tag-real">[実データ]</span> 商品ページ: 煙少なく灰残らない<br><span class="tag-infer">[AI推論]</span> ソロキャンパーの内的動機</div>
+      </div>
+    </div>
+
+    <div class="banner-gallery">
+      <div class="banner-card c2-card">
+        <img src="assets/C2_A1.png" alt="C2 A1"
+          onerror="this.outerHTML='<div style=\'background:#1a1a1a;aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;border-radius:8px;color:#555;font-size:12px;flex-direction:column;gap:4px\'><div>C2_A1</div><div style=\'font-size:10px\'>画像準備中</div></div>'">
+        <div class="banner-card-label"><div class="banner-card-copy">A1 / コピーA</div><div class="banner-card-type">ビジュアル1 — 静謐な炎</div></div>
+      </div>
+      <div class="banner-card c2-card">
+        <img src="assets/C2_A2.png" alt="C2 A2"
+          onerror="this.outerHTML='<div style=\'background:#1a1a1a;aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;border-radius:8px;color:#555;font-size:12px;flex-direction:column;gap:4px\'><div>C2_A2</div><div style=\'font-size:10px\'>画像準備中</div></div>'">
+        <div class="banner-card-label"><div class="banner-card-copy">A2 / コピーA</div><div class="banner-card-type">ビジュアル2 — ソロ夜</div></div>
+      </div>
+      <div class="banner-card c2-card">
+        <img src="assets/C2_A3.png" alt="C2 A3"
+          onerror="this.outerHTML='<div style=\'background:#1a1a1a;aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;border-radius:8px;color:#555;font-size:12px;flex-direction:column;gap:4px\'><div>C2_A3</div><div style=\'font-size:10px\'>画像準備中</div></div>'">
+        <div class="banner-card-label"><div class="banner-card-copy">A3 / コピーA</div><div class="banner-card-type">ビジュアル3 — 星空</div></div>
+      </div>
+      <div class="banner-card c2-card">
+        <img src="assets/C2_A4.png" alt="C2 A4"
+          onerror="this.outerHTML='<div style=\'background:#1a1a1a;aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;border-radius:8px;color:#555;font-size:12px;flex-direction:column;gap:4px\'><div>C2_A4</div><div style=\'font-size:10px\'>画像準備中</div></div>'">
+        <div class="banner-card-label"><div class="banner-card-copy">A4 / コピーA</div><div class="banner-card-type">ビジュアル4 — モノトーン</div></div>
+      </div>
+      <div class="banner-card c2-card">
+        <img src="assets/C2_B1.png" alt="C2 B1"
+          onerror="this.outerHTML='<div style=\'background:#1a1a1a;aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;border-radius:8px;color:#555;font-size:12px;flex-direction:column;gap:4px\'><div>C2_B1</div><div style=\'font-size:10px\'>画像準備中</div></div>'">
+        <div class="banner-card-label"><div class="banner-card-copy">B1 / コピーB</div><div class="banner-card-type">ビジュアル1 — 静謐な炎</div></div>
+      </div>
+      <div class="banner-card c2-card">
+        <img src="assets/C2_B2.png" alt="C2 B2"
+          onerror="this.outerHTML='<div style=\'background:#1a1a1a;aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;border-radius:8px;color:#555;font-size:12px;flex-direction:column;gap:4px\'><div>C2_B2</div><div style=\'font-size:10px\'>画像準備中</div></div>'">
+        <div class="banner-card-label"><div class="banner-card-copy">B2 / コピーB</div><div class="banner-card-type">ビジュアル2 — ソロ夜</div></div>
+      </div>
+      <div class="banner-card c2-card">
+        <img src="assets/C2_B3.png" alt="C2 B3"
+          onerror="this.outerHTML='<div style=\'background:#1a1a1a;aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;border-radius:8px;color:#555;font-size:12px;flex-direction:column;gap:4px\'><div>C2_B3</div><div style=\'font-size:10px\'>画像準備中</div></div>'">
+        <div class="banner-card-label"><div class="banner-card-copy">B3 / コピーB</div><div class="banner-card-type">ビジュアル3 — 星空</div></div>
+      </div>
+      <div class="banner-card c2-card">
+        <img src="assets/C2_B4.png" alt="C2 B4"
+          onerror="this.outerHTML='<div style=\'background:#1a1a1a;aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;border-radius:8px;color:#555;font-size:12px;flex-direction:column;gap:4px\'><div>C2_B4</div><div style=\'font-size:10px\'>画像準備中</div></div>'">
+        <div class="banner-card-label"><div class="banner-card-copy">B4 / コピーB</div><div class="banner-card-type">ビジュアル4 — モノトーン</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- C3 Section -->
+  <div class="cr-concept-section">
+    <div class="concept-section-header c3-header">
+      <span class="concept-id-badge c3-badge">C3</span>
+      <div>
+        <div class="concept-section-name">いい薪には、いい物語がある。</div>
+        <div class="concept-section-meta">
+          <span class="concept-section-target">ターゲット: 社会貢献意識の高いアウトドア好き（L3）</span>
+          <span class="layer-badge zenzai">潜在層</span>
+          <span class="tag-real">[実データ]</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="belief-mini">
+      <span class="bs-mini-before">「薪はただの燃料。どこで買っても同じ」</span>
+      <span class="bs-mini-arrow">→</span>
+      <span class="bs-mini-after">「この薪には作った人の物語がある。品質も良いし、買うことで誰かの力になれる」</span>
+    </div>
+
+    <div class="concept-context-strip">
+      <div>
+        <div class="ctx-item-label">コアメッセージ</div>
+        <div class="ctx-item-val">品質で選んで、後から知るストーリーに心が温まる。消費に意味が宿る瞬間</div>
+      </div>
+      <div>
+        <div class="ctx-item-label">感情フック</div>
+        <div class="ctx-item-val">品質で選んだ薪に、思いがけない温かい物語があった。消費に意味が宿る瞬間</div>
+      </div>
+      <div>
+        <div class="ctx-item-label">N1スコア</div>
+        <div class="ctx-item-val">複合スコア 0.65 / 差別化力最強 <span class="tag-infer">[AI推論]</span></div>
+      </div>
+      <div>
+        <div class="ctx-item-label">データ根拠</div>
+        <div class="ctx-item-val"><span class="tag-real">[実データ]</span> 企業: A型事業所/手割り/工賃還元<br><span class="tag-infer">[AI推論]</span> エシカル消費トレンド</div>
+      </div>
+    </div>
+
+    <div class="banner-gallery">
+      <div class="banner-card c3-card">
+        <img src="assets/C3_A1.png" alt="C3 A1"
+          onerror="this.outerHTML='<div style=\'background:#1a1a1a;aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;border-radius:8px;color:#555;font-size:12px;flex-direction:column;gap:4px\'><div>C3_A1</div><div style=\'font-size:10px\'>画像準備中</div></div>'">
+        <div class="banner-card-label"><div class="banner-card-copy">A1 / コピーA</div><div class="banner-card-type">ビジュアル1 — 木目+手仕事</div></div>
+      </div>
+      <div class="banner-card c3-card">
+        <img src="assets/C3_A2.png" alt="C3 A2"
+          onerror="this.outerHTML='<div style=\'background:#1a1a1a;aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;border-radius:8px;color:#555;font-size:12px;flex-direction:column;gap:4px\'><div>C3_A2</div><div style=\'font-size:10px\'>画像準備中</div></div>'">
+        <div class="banner-card-label"><div class="banner-card-copy">A2 / コピーA</div><div class="banner-card-type">ビジュアル2 — 薪割り</div></div>
+      </div>
+      <div class="banner-card c3-card">
+        <img src="assets/C3_A3.png" alt="C3 A3"
+          onerror="this.outerHTML='<div style=\'background:#1a1a1a;aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;border-radius:8px;color:#555;font-size:12px;flex-direction:column;gap:4px\'><div>C3_A3</div><div style=\'font-size:10px\'>画像準備中</div></div>'">
+        <div class="banner-card-label"><div class="banner-card-copy">A3 / コピーA</div><div class="banner-card-type">ビジュアル3 — 施設</div></div>
+      </div>
+      <div class="banner-card c3-card">
+        <img src="assets/C3_A4.png" alt="C3 A4"
+          onerror="this.outerHTML='<div style=\'background:#1a1a1a;aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;border-radius:8px;color:#555;font-size:12px;flex-direction:column;gap:4px\'><div>C3_A4</div><div style=\'font-size:10px\'>画像準備中</div></div>'">
+        <div class="banner-card-label"><div class="banner-card-copy">A4 / コピーA</div><div class="banner-card-type">ビジュアル4 — アース</div></div>
+      </div>
+      <div class="banner-card c3-card">
+        <img src="assets/C3_B1.png" alt="C3 B1"
+          onerror="this.outerHTML='<div style=\'background:#1a1a1a;aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;border-radius:8px;color:#555;font-size:12px;flex-direction:column;gap:4px\'><div>C3_B1</div><div style=\'font-size:10px\'>画像準備中</div></div>'">
+        <div class="banner-card-label"><div class="banner-card-copy">B1 / コピーB</div><div class="banner-card-type">ビジュアル1 — 木目+手仕事</div></div>
+      </div>
+      <div class="banner-card c3-card">
+        <img src="assets/C3_B2.png" alt="C3 B2"
+          onerror="this.outerHTML='<div style=\'background:#1a1a1a;aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;border-radius:8px;color:#555;font-size:12px;flex-direction:column;gap:4px\'><div>C3_B2</div><div style=\'font-size:10px\'>画像準備中</div></div>'">
+        <div class="banner-card-label"><div class="banner-card-copy">B2 / コピーB</div><div class="banner-card-type">ビジュアル2 — 薪割り</div></div>
+      </div>
+      <div class="banner-card c3-card">
+        <img src="assets/C3_B3.png" alt="C3 B3"
+          onerror="this.outerHTML='<div style=\'background:#1a1a1a;aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;border-radius:8px;color:#555;font-size:12px;flex-direction:column;gap:4px\'><div>C3_B3</div><div style=\'font-size:10px\'>画像準備中</div></div>'">
+        <div class="banner-card-label"><div class="banner-card-copy">B3 / コピーB</div><div class="banner-card-type">ビジュアル3 — 施設</div></div>
+      </div>
+      <div class="banner-card c3-card">
+        <img src="assets/C3_B4.png" alt="C3 B4"
+          onerror="this.outerHTML='<div style=\'background:#1a1a1a;aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;border-radius:8px;color:#555;font-size:12px;flex-direction:column;gap:4px\'><div>C3_B4</div><div style=\'font-size:10px\'>画像準備中</div></div>'">
+        <div class="banner-card-label"><div class="banner-card-copy">B4 / コピーB</div><div class="banner-card-type">ビジュアル4 — アース</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- C4 Section -->
+  <div class="cr-concept-section">
+    <div class="concept-section-header c4-header">
+      <span class="concept-id-badge c4-badge">C4</span>
+      <div>
+        <div class="concept-section-name">建築のプロが選んだ木で、焚き火を。</div>
+        <div class="concept-section-meta">
+          <span class="concept-section-target">ターゲット: 焚き火入門パパ + こだわりソロキャンパー（L1+L2横断）</span>
+          <span class="layer-badge jun">準顕在層</span>
+          <span class="layer-badge kenzai" style="margin-left:2px">顕在層</span>
+          <span class="tag-real">[実データ]</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="belief-mini">
+      <span class="bs-mini-before">「薪の品質なんて気にしたことない」</span>
+      <span class="bs-mini-arrow">→</span>
+      <span class="bs-mini-after">「建築用のひのき角材で作った薪があるんだ。品質が全然違う」</span>
+    </div>
+
+    <div class="concept-context-strip">
+      <div>
+        <div class="ctx-item-label">コアメッセージ</div>
+        <div class="ctx-item-val">建築用ひのき角材の権威性バッジ。薪に「品質」という概念を持ち込む新しさ</div>
+      </div>
+      <div>
+        <div class="ctx-item-label">感情フック</div>
+        <div class="ctx-item-val">「建築のプロが認めた品質」という権威性バッジ。薪に品質の概念を持ち込む新しさ</div>
+      </div>
+      <div>
+        <div class="ctx-item-label">N1スコア</div>
+        <div class="ctx-item-val">L1/L2横断。品質の権威性が明快 <span class="tag-infer">[AI推論]</span></div>
+      </div>
+      <div>
+        <div class="ctx-item-label">データ根拠</div>
+        <div class="ctx-item-val"><span class="tag-real">[実データ]</span> 商品ページ: 柱用角材/人工乾燥/抗菌性/室内保管可<br><span class="tag-infer">[AI推論]</span> 建築品質→焚き火品質アナロジー</div>
+      </div>
+    </div>
+
+    <div class="banner-gallery">
+      <div class="banner-card c4-card">
+        <img src="assets/C4_A1.png" alt="C4 A1"
+          onerror="this.outerHTML='<div style=\'background:#1a1a1a;aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;border-radius:8px;color:#555;font-size:12px;flex-direction:column;gap:4px\'><div>C4_A1</div><div style=\'font-size:10px\'>画像準備中</div></div>'">
+        <div class="banner-card-label"><div class="banner-card-copy">A1 / コピーA</div><div class="banner-card-type">ビジュアル1 — 角材断面</div></div>
+      </div>
+      <div class="banner-card c4-card">
+        <img src="assets/C4_A2.png" alt="C4 A2"
+          onerror="this.outerHTML='<div style=\'background:#1a1a1a;aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;border-radius:8px;color:#555;font-size:12px;flex-direction:column;gap:4px\'><div>C4_A2</div><div style=\'font-size:10px\'>画像準備中</div></div>'">
+        <div class="banner-card-label"><div class="banner-card-copy">A2 / コピーA</div><div class="banner-card-type">ビジュアル2 — 建築品質</div></div>
+      </div>
+      <div class="banner-card c4-card">
+        <img src="assets/C4_A3.png" alt="C4 A3"
+          onerror="this.outerHTML='<div style=\'background:#1a1a1a;aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;border-radius:8px;color:#555;font-size:12px;flex-direction:column;gap:4px\'><div>C4_A3</div><div style=\'font-size:10px\'>画像準備中</div></div>'">
+        <div class="banner-card-label"><div class="banner-card-copy">A3 / コピーA</div><div class="banner-card-type">ビジュアル3 — ゴールド</div></div>
+      </div>
+      <div class="banner-card c4-card">
+        <img src="assets/C4_A4.png" alt="C4 A4"
+          onerror="this.outerHTML='<div style=\'background:#1a1a1a;aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;border-radius:8px;color:#555;font-size:12px;flex-direction:column;gap:4px\'><div>C4_A4</div><div style=\'font-size:10px\'>画像準備中</div></div>'">
+        <div class="banner-card-label"><div class="banner-card-copy">A4 / コピーA</div><div class="banner-card-type">ビジュアル4 — プロ品質</div></div>
+      </div>
+      <div class="banner-card c4-card">
+        <img src="assets/C4_B1.png" alt="C4 B1"
+          onerror="this.outerHTML='<div style=\'background:#1a1a1a;aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;border-radius:8px;color:#555;font-size:12px;flex-direction:column;gap:4px\'><div>C4_B1</div><div style=\'font-size:10px\'>画像準備中</div></div>'">
+        <div class="banner-card-label"><div class="banner-card-copy">B1 / コピーB</div><div class="banner-card-type">ビジュアル1 — 角材断面</div></div>
+      </div>
+      <div class="banner-card c4-card">
+        <img src="assets/C4_B2.png" alt="C4 B2"
+          onerror="this.outerHTML='<div style=\'background:#1a1a1a;aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;border-radius:8px;color:#555;font-size:12px;flex-direction:column;gap:4px\'><div>C4_B2</div><div style=\'font-size:10px\'>画像準備中</div></div>'">
+        <div class="banner-card-label"><div class="banner-card-copy">B2 / コピーB</div><div class="banner-card-type">ビジュアル2 — 建築品質</div></div>
+      </div>
+      <div class="banner-card c4-card">
+        <img src="assets/C4_B3.png" alt="C4 B3"
+          onerror="this.outerHTML='<div style=\'background:#1a1a1a;aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;border-radius:8px;color:#555;font-size:12px;flex-direction:column;gap:4px\'><div>C4_B3</div><div style=\'font-size:10px\'>画像準備中</div></div>'">
+        <div class="banner-card-label"><div class="banner-card-copy">B3 / コピーB</div><div class="banner-card-type">ビジュアル3 — ゴールド</div></div>
+      </div>
+      <div class="banner-card c4-card">
+        <img src="assets/C4_B4.png" alt="C4 B4"
+          onerror="this.outerHTML='<div style=\'background:#1a1a1a;aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;border-radius:8px;color:#555;font-size:12px;flex-direction:column;gap:4px\'><div>C4_B4</div><div style=\'font-size:10px\'>画像準備中</div></div>'">
+        <div class="banner-card-label"><div class="banner-card-copy">B4 / コピーB</div><div class="banner-card-type">ビジュアル4 — プロ品質</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Short Ad Section -->
+  <div class="shortad-section">
+    <div class="shortad-inner">
+      <div class="section-header" style="margin-bottom:24px">
+        <div class="act-label">SHORT AD</div>
+        <h2 class="section-title">ショート動画広告</h2>
+        <p class="section-sub">12シーン構成の縦型ショート広告。<span class="tag-real">[実データ]</span></p>
+      </div>
+      <div class="shortad-flex">
+        <div class="shortad-video-wrap">
+          <video controls preload="none" poster="">
+            <source src="assets/final-concept-SH-wm-0412-001.mp4" type="video/mp4">
+          </video>
+          <div style="font-size:11px;color:var(--text3);margin-top:8px;text-align:center">
+            final-concept-SH-wm-0412-001.mp4
+          </div>
+        </div>
+        <div class="shortad-info">
+          <div style="font-size:14px;font-weight:700;margin-bottom:6px">12シーン構成</div>
+          <p style="font-size:13px;color:var(--text2);margin-bottom:16px;line-height:1.6">
+            各シーンは感情アークに沿って設計。ひのき薪の特性と焚き火体験のクオリティを視覚的に伝える。
+          </p>
+          <div class="scene-grid">
+            <div class="scene-thumb"><img src="assets/scene_01.jpg" alt="Scene 01"
+              onerror="this.outerHTML='<div style=\'background:#1a1a1a;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;color:#555;font-size:10px\'>S01</div>'"
+            ><div class="scene-thumb-num">Scene 01</div></div>
+            <div class="scene-thumb"><img src="assets/scene_02.jpg" alt="Scene 02"
+              onerror="this.outerHTML='<div style=\'background:#1a1a1a;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;color:#555;font-size:10px\'>S02</div>'"
+            ><div class="scene-thumb-num">Scene 02</div></div>
+            <div class="scene-thumb"><img src="assets/scene_03.jpg" alt="Scene 03"
+              onerror="this.outerHTML='<div style=\'background:#1a1a1a;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;color:#555;font-size:10px\'>S03</div>'"
+            ><div class="scene-thumb-num">Scene 03</div></div>
+            <div class="scene-thumb"><img src="assets/scene_04.jpg" alt="Scene 04"
+              onerror="this.outerHTML='<div style=\'background:#1a1a1a;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;color:#555;font-size:10px\'>S04</div>'"
+            ><div class="scene-thumb-num">Scene 04</div></div>
+            <div class="scene-thumb"><img src="assets/scene_05.jpg" alt="Scene 05"
+              onerror="this.outerHTML='<div style=\'background:#1a1a1a;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;color:#555;font-size:10px\'>S05</div>'"
+            ><div class="scene-thumb-num">Scene 05</div></div>
+            <div class="scene-thumb"><img src="assets/scene_06.jpg" alt="Scene 06"
+              onerror="this.outerHTML='<div style=\'background:#1a1a1a;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;color:#555;font-size:10px\'>S06</div>'"
+            ><div class="scene-thumb-num">Scene 06</div></div>
+            <div class="scene-thumb"><img src="assets/scene_07.jpg" alt="Scene 07"
+              onerror="this.outerHTML='<div style=\'background:#1a1a1a;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;color:#555;font-size:10px\'>S07</div>'"
+            ><div class="scene-thumb-num">Scene 07</div></div>
+            <div class="scene-thumb"><img src="assets/scene_08.jpg" alt="Scene 08"
+              onerror="this.outerHTML='<div style=\'background:#1a1a1a;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;color:#555;font-size:10px\'>S08</div>'"
+            ><div class="scene-thumb-num">Scene 08</div></div>
+            <div class="scene-thumb"><img src="assets/scene_09.jpg" alt="Scene 09"
+              onerror="this.outerHTML='<div style=\'background:#1a1a1a;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;color:#555;font-size:10px\'>S09</div>'"
+            ><div class="scene-thumb-num">Scene 09</div></div>
+            <div class="scene-thumb"><img src="assets/scene_10.jpg" alt="Scene 10"
+              onerror="this.outerHTML='<div style=\'background:#1a1a1a;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;color:#555;font-size:10px\'>S10</div>'"
+            ><div class="scene-thumb-num">Scene 10</div></div>
+            <div class="scene-thumb"><img src="assets/scene_11.jpg" alt="Scene 11"
+              onerror="this.outerHTML='<div style=\'background:#1a1a1a;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;color:#555;font-size:10px\'>S11</div>'"
+            ><div class="scene-thumb-num">Scene 11</div></div>
+            <div class="scene-thumb"><img src="assets/scene_12.jpg" alt="Scene 12"
+              onerror="this.outerHTML='<div style=\'background:#1a1a1a;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;color:#555;font-size:10px\'>S12</div>'"
+            ><div class="scene-thumb-num">Scene 12</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /panel-cr -->
+
+
+<!-- ===================================================
+     PAGE: 戦略
+     =================================================== -->
+<div id="panel-strategy" class="page-panel" role="tabpanel" aria-labelledby="tab-strategy">
+
+  <!-- N1分析 -->
+  <div class="section narrow">
+    <div class="section-header">
+      <div class="act-label">ACT 1 — N1分析</div>
+      <h2 class="section-title">4層のN1ターゲット分析</h2>
+      <p class="section-sub">
+        <span class="tag-infer">[AI推論]</span>
+        AGI推論（Opus 4.6）+ WebSearch。DProデータなし。
+        商品ページ一次情報 + キャンプ市場リサーチから導出。
+      </p>
+    </div>
+
+    <div class="n1-grid">
+
+      <!-- L1 -->
+      <div class="n1-card primary-card">
+        <span class="n1-primary-badge">PRIMARY N1</span>
+        <div class="n1-layer-id">L1 <span class="tag-real">[実データ]</span></div>
+        <div class="n1-layer-badge-row">
+          <div class="n1-name">焚き火入門パパ</div>
+          <span class="layer-badge jun">準顕在層</span>
+        </div>
+        <div style="font-size:11px;color:var(--text3);margin-bottom:4px;line-height:1.5">
+          薪の必要性は認知しているが、品質差に気づいていない
+        </div>
+        <div class="n1-persona">32–38歳 / 会社員 / 首都圏郊外 / 妻+子1–2人<br>
+        週末ファミリーキャンプ始めたばかり。薪はキャンプ場かHCで適当に購入。</div>
+
+        <div class="n1-insight-block">
+          <div class="n1-insight-lbl">表層ニーズ</div>
+          <div class="n1-insight-txt">キャンプの焚き火で使える良い薪が欲しい</div>
+        </div>
+        <div class="n1-insight-block">
+          <div class="n1-insight-lbl">深層ニーズ</div>
+          <div class="n1-insight-txt">子供に火を見せたい。平日のデスクワークで失いかけている「手を使って何かを成し遂げる実感」を週末に取り戻したい</div>
+        </div>
+        <div class="n1-fear">
+          「薪に火がつかなくて子供の前で格好がつかない。煙が大量に出て隣のサイトに迷惑をかける」
+        </div>
+        <div class="n1-insight-block">
+          <div class="n1-insight-lbl">脳内競合</div>
+          <div class="n1-insight-txt" style="font-size:12px;color:var(--text2)">キャンプ場の薪売店（500–1,000円/束）/ ホームセンター / ガスコンロ</div>
+        </div>
+        <div class="n1-score-row">
+          <span class="score-pill">人口規模 <strong>0.75</strong></span>
+          <span class="score-pill">CV確率 <strong>0.60</strong></span>
+          <span class="score-pill">AOV <strong>0.55</strong></span>
+          <span class="score-pill">脳内競合希少性 <strong>0.70</strong></span>
+          <span class="score-composite">複合スコア 0.65</span>
+        </div>
+        <div style="font-size:11px;color:var(--text3);margin-top:8px">
+          <span class="tag-infer">[AI推論]</span> 人数最多だがAOV低め。キャンプ場売店が脳内競合にある
+        </div>
+      </div>
+
+      <!-- L2 -->
+      <div class="n1-card">
+        <div class="n1-layer-id">L2 <span class="tag-infer">[AI推論]</span></div>
+        <div class="n1-layer-badge-row">
+          <div class="n1-name">こだわりソロキャンパー</div>
+          <span class="layer-badge kenzai">顕在層</span>
+        </div>
+        <div style="font-size:11px;color:var(--text3);margin-bottom:4px;line-height:1.5">
+          品質の良い薪を積極的に探している
+        </div>
+        <div class="n1-persona">28–42歳 / IT・クリエイティブ系 / 都市部 / 月1–2回ソロキャンプ<br>
+        道具にこだわり、SNS投稿もする。焚き火が目的のキャンプをする。ギアマニア。</div>
+
+        <div class="n1-insight-block">
+          <div class="n1-insight-lbl">深層ニーズ</div>
+          <div class="n1-insight-txt">焚き火の「質」を上げたい。炎・爆ぜる音・香り — 全てが自分だけの世界を構成する要素。火を見つめる時間が瞑想</div>
+        </div>
+        <div class="n1-fear">
+          「安物の薪で煙まみれになるのが嫌。虫が出る薪も嫌。せっかくの非日常を台無しにしたくない」
+        </div>
+        <div class="n1-insight-block">
+          <div class="n1-insight-lbl">脳内競合</div>
+          <div class="n1-insight-txt" style="font-size:12px;color:var(--text2)">Amazon/楽天のプレミアム薪 / メヤマキ等の産地ブランド薪 / キャンプ場現地調達</div>
+        </div>
+        <div class="n1-score-row">
+          <span class="score-pill">人口規模 <strong>0.50</strong></span>
+          <span class="score-pill">CV確率 <strong>0.75</strong></span>
+          <span class="score-pill">AOV <strong>0.70</strong></span>
+          <span class="score-pill">脳内競合希少性 <strong>0.55</strong></span>
+          <span class="score-composite">複合スコア 0.63</span>
+        </div>
+        <div style="font-size:11px;color:var(--text3);margin-top:8px">
+          <span class="tag-infer">[AI推論]</span> CV確率高い（品質重視で探している）がEC選択肢多い
+        </div>
+      </div>
+
+      <!-- L3 -->
+      <div class="n1-card">
+        <div class="n1-layer-id">L3 <span class="tag-infer">[AI推論]</span></div>
+        <div class="n1-layer-badge-row">
+          <div class="n1-name">社会貢献意識の高いアウトドア好き</div>
+          <span class="layer-badge zenzai">潜在層</span>
+        </div>
+        <div style="font-size:11px;color:var(--text3);margin-bottom:4px;line-height:1.5">
+          薪自体は探していないが、エシカル消費の文脈で出会う
+        </div>
+        <div class="n1-persona">30–50歳 / CSR担当・教育・NPO・意識高い会社員 / 全国 / エシカル消費に関心</div>
+
+        <div class="n1-insight-block">
+          <div class="n1-insight-lbl">深層ニーズ</div>
+          <div class="n1-insight-txt">消費を通じて社会に良い影響を与えたい。「誰かの働く喜びを支える薪」という物語に共感し、自分の消費に意味を持たせたい</div>
+        </div>
+        <div class="n1-fear">
+          「同情買いではなく、本当に良い商品だから買いたい。品質が悪いと次は買わない」
+        </div>
+        <div class="n1-insight-block">
+          <div class="n1-insight-lbl">脳内競合</div>
+          <div class="n1-insight-txt" style="font-size:12px;color:var(--text2)">他の障がい者支援施設の商品 / フェアトレード認証の海外商品 / 地元林業の薪（地産地消）</div>
+        </div>
+        <div class="n1-score-row">
+          <span class="score-pill">人口規模 <strong>0.35</strong></span>
+          <span class="score-pill">CV確率 <strong>0.80</strong></span>
+          <span class="score-pill">AOV <strong>0.65</strong></span>
+          <span class="score-pill">脳内競合希少性 <strong>0.80</strong></span>
+          <span class="score-composite">複合スコア 0.65</span>
+        </div>
+        <div style="font-size:11px;color:var(--text3);margin-top:8px">
+          <span class="tag-infer">[AI推論]</span> 人数少ないが、コンセプト合致時CV率高。障がい者支援×ひのき薪は唯一無二
+        </div>
+      </div>
+
+      <!-- L4 -->
+      <div class="n1-card">
+        <div class="n1-layer-id">L4 <span class="tag-infer">[AI推論]</span></div>
+        <div class="n1-layer-badge-row">
+          <div class="n1-name">薪ストーブオーナー</div>
+          <span class="layer-badge chozai">超潜在層</span>
+        </div>
+        <div style="font-size:11px;color:var(--text3);margin-bottom:4px;line-height:1.5">
+          EC購入の習慣がなく、地元調達が主流
+        </div>
+        <div class="n1-persona">40–60歳 / 経営者・専門職 / 郊外・地方 / 自宅に薪ストーブ / 冬の暖房として大量消費</div>
+
+        <div class="n1-insight-block">
+          <div class="n1-insight-lbl">深層ニーズ</div>
+          <div class="n1-insight-txt">薪ストーブのある暮らしを維持したい。着火用の良い針葉樹薪がほしい</div>
+        </div>
+        <div class="n1-fear">
+          「湿った薪でストーブを傷める。安定供給が途切れる」
+        </div>
+        <div class="n1-insight-block">
+          <div class="n1-insight-lbl">脳内競合</div>
+          <div class="n1-insight-txt" style="font-size:12px;color:var(--text2)">地元の薪屋（軽トラ配達）/ 林業者からの直接購入 / 自分で薪割り</div>
+        </div>
+        <div class="n1-score-row">
+          <span class="score-pill">人口規模 <strong>0.25</strong></span>
+          <span class="score-pill">CV確率 <strong>0.40</strong></span>
+          <span class="score-pill">AOV <strong>0.80</strong></span>
+          <span class="score-pill">脳内競合希少性 <strong>0.30</strong></span>
+          <span class="score-composite" style="background:rgba(153,153,170,.12);border-color:rgba(153,153,170,.3);color:var(--text2)">複合スコア 0.44</span>
+        </div>
+        <div style="font-size:11px;color:var(--text3);margin-top:8px">
+          <span class="tag-infer">[AI推論]</span> 大量消費者だがEC購入は少数派。AOV高いがリピート前提で脳内競合が強い
+        </div>
+      </div>
+
+    </div><!-- /n1-grid -->
+
+    <!-- Primary N1 belief shift -->
+    <div style="margin-top:32px">
+      <div class="card">
+        <div class="card-title">PRIMARY N1 選定根拠 — L1: 焚き火入門パパ <span class="tag-infer">[AI推論]</span></div>
+        <p style="font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:16px">
+          ①人口が最も多い（キャンプブームのファミリー層）<br>
+          ②ひのき薪の「火がつきやすい・煙が少ない・香りが良い」が初心者の不安を正確に解消する<br>
+          ③子供との体験という感情的価値が高くCR訴求に適している<br>
+          ④Meta広告のFacebook/Instagramでリーチしやすい（30代パパはアクティブユーザー）<br>
+          ※L3（社会貢献層）もcomposite同等だが、人数×リーチャビリティでL1を優先。
+        </p>
+        <div class="belief-shift-block">
+          <div class="bs-box bs-before">
+            <div class="bs-label">BEFORE</div>
+            「薪なんてキャンプ場で買えばいい。何でも同じでしょ」
+          </div>
+          <div style="display:flex;align-items:center;font-size:20px;color:var(--accent)">→</div>
+          <div class="bs-box bs-after">
+            <div class="bs-label">AFTER</div>
+            「ひのきの薪で焚き火がこんなに変わるんだ。火がつきやすくて、香りが最高。これなら子供と一緒に楽しめる」
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Concept Compare -->
+  <div class="section narrow">
+    <div class="section-header">
+      <div class="act-label">ACT 2 — コンセプト設計</div>
+      <h2 class="section-title">4コンセプト比較</h2>
+      <p class="section-sub">
+        今回は4コンセプト全展開。各コンセプトが独立した世界観で最大化する設計。
+        <span class="tag-real">[実データ]</span> strategy.json → concept.hypotheses
+      </p>
+    </div>
+
+    <div style="overflow-x:auto">
+      <table class="concept-compare">
+        <thead>
+          <tr>
+            <th style="width:120px">項目</th>
+            <th>C1 <span style="color:var(--c1)">はじめての焚き火</span></th>
+            <th>C2 <span style="color:var(--c2)">自分だけの時間</span></th>
+            <th>C3 <span style="color:var(--c3)">いい物語がある</span></th>
+            <th>C4 <span style="color:var(--c4)">建築のプロが選んだ</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="row-label">ターゲット層</td>
+            <td class="c1-col"><span class="layer-badge jun">準顕在層</span><br><small>L1: 焚き火入門パパ</small></td>
+            <td class="c2-col"><span class="layer-badge kenzai">顕在層</span><br><small>L2: こだわりソロキャンパー</small></td>
+            <td class="c3-col"><span class="layer-badge zenzai">潜在層</span><br><small>L3: 社会貢献意識層</small></td>
+            <td class="c4-col"><span class="layer-badge jun">準顕在層</span> <span class="layer-badge kenzai">顕在層</span><br><small>L1+L2 横断</small></td>
+          </tr>
+          <tr>
+            <td class="row-label">N1スコア</td>
+            <td class="c1-col"><span style="font-size:20px;font-weight:900;color:var(--c1)">0.65</span> <span class="tag-infer">[AI推論]</span></td>
+            <td class="c2-col"><span style="font-size:20px;font-weight:900;color:var(--c2)">0.63</span> <span class="tag-infer">[AI推論]</span></td>
+            <td class="c3-col"><span style="font-size:20px;font-weight:900;color:var(--c3)">0.65</span> <span class="tag-infer">[AI推論]</span></td>
+            <td class="c4-col"><span style="font-size:20px;font-weight:900;color:var(--c4)">—</span></td>
+          </tr>
+          <tr>
+            <td class="row-label">感情フック</td>
+            <td class="c1-col">子供が初めて火を見つめた瞬間の表情</td>
+            <td class="c2-col">焚き火の炎を見つめる時間は現代人の瞑想</td>
+            <td class="c3-col">品質で選んだ薪に、思いがけない温かい物語があった</td>
+            <td class="c4-col">「建築のプロが認めた品質」という権威性バッジ</td>
+          </tr>
+          <tr>
+            <td class="row-label">データ根拠</td>
+            <td class="c1-col">
+              <span class="tag-real">[実データ]</span> 商品ページ: 火つき良/煙少/灰なし<br>
+              <span class="tag-infer">[AI推論]</span> 初心者ペイン=火がつかない不安
+            </td>
+            <td class="c2-col">
+              <span class="tag-real">[実データ]</span> 商品ページ: 煙少なく灰残らない<br>
+              <span class="tag-infer">[AI推論]</span> ソロキャンパーの内的動機
+            </td>
+            <td class="c3-col">
+              <span class="tag-real">[実データ]</span> 企業情報: A型事業所/手割り製造/工賃還元<br>
+              <span class="tag-infer">[AI推論]</span> エシカル消費トレンド
+            </td>
+            <td class="c4-col">
+              <span class="tag-real">[実データ]</span> 商品ページ: 柱用角材/人工乾燥/抗菌性/室内保管可<br>
+              <span class="tag-infer">[AI推論]</span> 建築品質→焚き火品質のアナロジー
+            </td>
+          </tr>
+          <tr>
+            <td class="row-label">強み</td>
+            <td class="c1-col"><span class="strength-text">初心者の最大ペイン（火がつかない恐怖）を直接解決し、感情的報酬（子供との原体験）を提示</span></td>
+            <td class="c2-col"><span class="strength-text">焚き火の「質」という上位概念での訴求。感度の高い層に刺さる</span></td>
+            <td class="c3-col"><span class="strength-text">唯一無二の差別化（障がい者支援×建築用ひのき）。脳内競合が最も少ない</span></td>
+            <td class="c4-col"><span class="strength-text">品質の権威性が明快。L1（安心感）にもL2（品質欲求）にも響く</span></td>
+          </tr>
+          <tr>
+            <td class="row-label">リスク</td>
+            <td class="c1-col"><span class="risk-text">ひのきは燃焼時間が短い点を問われうる。「焚き付け最適+広葉樹と組み合わせ推奨」の補足が必要</span></td>
+            <td class="c2-col"><span class="risk-text">ターゲット母数がL1より少ない。Meta広告のCPAが合うか要検証</span></td>
+            <td class="c3-col"><span class="risk-text">社会貢献を前面に出しすぎると同情買いの印象。品質→ストーリーの順序が鍵</span></td>
+            <td class="c4-col"><span class="risk-text">「建築の端材」が「余り物」と受け取られるリスク。「プロが選んだ品質」の文脈で伝える必要あり</span></td>
+          </tr>
+          <tr>
+            <td class="row-label">推奨</td>
+            <td class="c1-col" style="text-align:center"><span style="background:var(--c1);color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:100px">Primary</span></td>
+            <td class="c2-col" style="text-align:center">—</td>
+            <td class="c3-col" style="text-align:center"><span style="background:var(--c3);color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:100px">Secondary</span></td>
+            <td class="c4-col" style="text-align:center">—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 商材beliefShift -->
+    <div style="margin-top:32px" class="card">
+      <div class="card-title">ブランドガード <span class="tag-real">[実データ]</span></div>
+      <div class="grid-2" style="margin-top:12px">
+        <div>
+          <div style="font-size:12px;font-weight:700;color:var(--text3);margin-bottom:8px">NG表現</div>
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:6px">
+            <li style="font-size:12px;color:#e07070;padding:6px 10px;background:rgba(220,80,80,.06);border:1px solid rgba(220,80,80,.15);border-radius:6px">「障がい者が作った」— 同情訴求禁止</li>
+            <li style="font-size:12px;color:#e07070;padding:6px 10px;background:rgba(220,80,80,.06);border:1px solid rgba(220,80,80,.15);border-radius:6px">「端材・余り物」— 「建築のプロが選んだひのき角材から生まれた」と表現</li>
+            <li style="font-size:12px;color:#e07070;padding:6px 10px;background:rgba(220,80,80,.06);border:1px solid rgba(220,80,80,.15);border-radius:6px">「絶対・確実・必ず」— 薬機法的な断言禁止</li>
+            <li style="font-size:12px;color:#e07070;padding:6px 10px;background:rgba(220,80,80,.06);border:1px solid rgba(220,80,80,.15);border-radius:6px">「最安値・激安」— 価格競争しない</li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-size:12px;font-weight:700;color:var(--text3);margin-bottom:8px">必須要素</div>
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:6px">
+            <li style="font-size:12px;color:var(--green);padding:6px 10px;background:rgba(46,204,122,.06);border:1px solid rgba(46,204,122,.15);border-radius:6px">ひのき薪であること</li>
+            <li style="font-size:12px;color:var(--green);padding:6px 10px;background:rgba(46,204,122,.06);border:1px solid rgba(46,204,122,.15);border-radius:6px">人工乾燥済み</li>
+            <li style="font-size:12px;color:var(--green);padding:6px 10px;background:rgba(46,204,122,.06);border:1px solid rgba(46,204,122,.15);border-radius:6px">価格帯の明示（2,400円〜）</li>
+          </ul>
+          <div style="font-size:12px;color:var(--text2);margin-top:12px;font-style:italic">
+            トーン: 温かく、誠実に。押し売りしない。品質で語り、ストーリーで共感を得る
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /panel-strategy -->
+
+
+<!-- ===================================================
+     PAGE: RAG
+     =================================================== -->
+<div id="panel-rag" class="page-panel" role="tabpanel" aria-labelledby="tab-rag">
+
+  <div class="section narrow">
+    <div class="section-header">
+      <div class="act-label">RAG — データ基盤</div>
+      <h2 class="section-title">情報源とデータ信頼度</h2>
+      <p class="section-sub">
+        AIパクがコンセプト・CR設計に使ったデータソースとその信頼度スコアを可視化する。
+        <span class="tag-real">[実データ]</span> strategy.json → productIntel
+      </p>
+    </div>
+
+    <div class="grid-2" style="margin-bottom:24px">
+      <!-- dataConfidence -->
+      <div class="card">
+        <div class="card-title">データ信頼度スコア <span class="tag-real">[実データ]</span></div>
+        <div style="font-size:36px;font-weight:900;color:var(--accent);line-height:1;margin-bottom:4px">0.70</div>
+        <div style="font-size:12px;color:var(--text2);margin-bottom:16px">dataConfidence (0–1.0)</div>
+        <div class="rag-confidence-bar-wrap">
+          <div class="rag-bar-bg">
+            <div class="rag-bar-fill" style="width:70%"></div>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--text3);margin-top:4px">
+          <span>0</span><span style="color:var(--accent)">0.70</span><span>1.0</span>
+        </div>
+        <p style="font-size:12px;color:var(--text2);margin-top:12px;line-height:1.6;border-top:1px solid var(--border);padding-top:12px">
+          LPなし、DProデータなし。一次情報はECサイト商品ページのみ。補足はWeb検索。
+        </p>
+      </div>
+
+      <!-- RAG構成 -->
+      <div class="card">
+        <div class="card-title">RAGチャンク構成 <span class="tag-infer">[AI推論]</span></div>
+        <div class="rag-chunk-bar">
+          <div class="chunk-count">12</div>
+          <div style="font-size:13px;color:var(--text2)">チャンク</div>
+        </div>
+        <div style="margin-top:12px;display:flex;flex-direction:column;gap:8px">
+          <div style="display:flex;justify-content:space-between;font-size:12px">
+            <span style="color:var(--text2)">商品ページ情報（EC）</span>
+            <span style="color:var(--accent)">4 chunks</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:12px">
+            <span style="color:var(--text2)">会社・企業情報</span>
+            <span style="color:var(--accent)">3 chunks</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:12px">
+            <span style="color:var(--text2)">競合・市場リサーチ（WebSearch）</span>
+            <span style="color:var(--accent)">3 chunks</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:12px">
+            <span style="color:var(--text2)">薪の情報室ブログ</span>
+            <span style="color:var(--accent)">2 chunks</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- データソース詳細 -->
+    <div class="card" style="margin-bottom:24px">
+      <div class="card-title">データソース詳細</div>
+      <ul class="rag-source-list">
+        <li class="rag-source-item">
+          <div class="rag-source-icon" style="background:rgba(46,204,122,.12);color:var(--green)">EC</div>
+          <div>
+            <div class="rag-source-name">ECサイト商品ページ <span class="tag-real">[実データ]</span></div>
+            <div class="rag-source-desc">
+              workfair.co.jp/p/item-list/list/<br>
+              SKU情報（S/M/L/MIX）、価格（2,400–3,400円）、ベネフィット記述、配送条件。4 SKU全品7–8kg。
+            </div>
+          </div>
+        </li>
+        <li class="rag-source-item">
+          <div class="rag-source-icon" style="background:rgba(61,142,240,.12);color:var(--blue)">社</div>
+          <div>
+            <div class="rag-source-name">企業サイト・会社情報 <span class="tag-real">[実データ]</span></div>
+            <div class="rag-source-desc">
+              workfair.co.jp/<br>
+              静岡県三島市の障がい者就労支援A型事業所。手割り製造。工賃が利用者に直接還元。
+            </div>
+          </div>
+        </li>
+        <li class="rag-source-item">
+          <div class="rag-source-icon" style="background:rgba(255,107,53,.12);color:var(--accent)">Web</div>
+          <div>
+            <div class="rag-source-name">WebSearch（DPro代替） <span class="tag-infer">[AI推論]</span></div>
+            <div class="rag-source-desc">
+              DProデータなし → WebSearch + Meta広告ライブラリーで代替。<br>
+              薪市場の競合環境、キャンプブームのトレンド、エシカル消費トレンド等。二次・三次情報として扱う。
+            </div>
+          </div>
+        </li>
+        <li class="rag-source-item">
+          <div class="rag-source-icon" style="background:rgba(212,160,23,.12);color:var(--gold)">Blog</div>
+          <div>
+            <div class="rag-source-name">薪の情報室ブログ <span class="tag-real">[実データ]</span></div>
+            <div class="rag-source-desc">
+              workfair.co.jp/blog/<br>
+              ひのき薪の特性・使い方・保管方法等の専門知識コンテンツ。SEO基盤。
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- DPro状況 -->
+    <div class="card" style="margin-bottom:24px">
+      <div class="card-title">DPro（動的プロダクトリサーチ）の状況</div>
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+        <div style="width:10px;height:10px;border-radius:50%;background:#e07070;flex-shrink:0"></div>
+        <div style="font-size:13px;font-weight:700;color:#e07070">DProデータ: 未取得</div>
+      </div>
+      <p style="font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:12px">
+        ワークフェア ひのき薪はニッチ商材のため、Meta広告ライブラリーでの競合出稿事例がほぼ存在しない。
+        DProによる競合クリエイティブ分析は今回スキップし、WebSearchで代替した。
+      </p>
+      <div style="background:rgba(255,107,53,.05);border:1px solid rgba(255,107,53,.2);border-radius:8px;padding:14px 16px">
+        <div style="font-size:12px;font-weight:700;color:var(--accent);margin-bottom:6px">影響とリスク</div>
+        <p style="font-size:12px;color:var(--text2);line-height:1.7">
+          競合クリエイティブのベンチマークなしでCRを設計している。
+          初回配信後のパフォーマンスデータを蓄積し、次サイクルでDPro活用可能な競合が出現した際に仮説を再検証する想定。
+        </p>
+      </div>
+    </div>
+
+    <!-- 競合環境 -->
+    <div class="card">
+      <div class="card-title">競合環境サマリー <span class="tag-infer">[AI推論]</span></div>
+      <p style="font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:16px">
+        薪のMeta広告出稿者はほぼ不在。ニッチ商材のブルーオーシャン。
+        競合はホームセンター（低価格・品種限定）、Amazon/楽天出品者（多数・品質差大）、専門EC。大手ブランドのD2C薪は存在しない。
+      </p>
+      <div class="rag-competitor-grid">
+        <div class="competitor-card">
+          <div class="comp-name">ホームセンター各社</div>
+          <div class="comp-pos">低価格・手軽だが品種選択不可</div>
+          <div class="comp-price">500–2,000円 / 5–10kg</div>
+        </div>
+        <div class="competitor-card">
+          <div class="comp-name">Amazon / 楽天出品者</div>
+          <div class="comp-pos">多様だが品質にばらつき</div>
+          <div class="comp-price">1,000–3,000円 / 10kg</div>
+        </div>
+        <div class="competitor-card">
+          <div class="comp-name">メヤマキ（白神の薪）</div>
+          <div class="comp-pos">品質訴求・産地ブランド</div>
+          <div class="comp-price">約10kg送料無料</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div><!-- /panel-rag -->
+
+
+<!-- ===== FOOTER ===== -->
+<footer id="site-footer">
+  <div>ワークフェア ひのき薪 — AIパク 広告制作ポートフォリオ</div>
+  <div style="margin-top:6px">Portfolio v1.0 / 2026-04-12 | Generated by AIパク (intern-pakukun)</div>
+  <div style="margin-top:4px;font-size:11px">
+    <span class="tag-real">[実データ]</span> = strategy.json / ECサイト一次情報 &nbsp;
+    <span class="tag-infer">[AI推論]</span> = AGI推論 (Opus 4.6) による分析
+  </div>
+</footer>
+
+
+<script>
+// ===== TAB NAVIGATION =====
+(function(){
+  const tabs = document.querySelectorAll('.nav-tab');
+  const panels = document.querySelectorAll('.page-panel');
+
+  function showTab(tabName){
+    tabs.forEach(t => {
+      const active = t.dataset.tab === tabName;
+      t.classList.toggle('active', active);
+      t.setAttribute('aria-selected', active ? 'true' : 'false');
+    });
+    panels.forEach(p => {
+      p.classList.toggle('active', p.id === 'panel-' + tabName);
+    });
+    // Save to localStorage
+    try { localStorage.setItem('wm-active-tab', tabName); } catch(e){}
+    // Scroll to top of content
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  }
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => showTab(tab.dataset.tab));
+  });
+
+  // Restore last tab
+  try {
+    const saved = localStorage.getItem('wm-active-tab');
+    if(saved && document.getElementById('panel-' + saved)){
+      showTab(saved);
+    }
+  } catch(e){}
+})();
+
+// ===== INTERSECTION OBSERVER for sticky nav active =====
+// (not needed with page tab model, but kept for future scroll-based highlighting)
+</script>
+
+</body>
+</html>
